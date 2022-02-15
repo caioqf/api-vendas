@@ -56,9 +56,13 @@ export default class ProductsController {
 
     const createProduct = new CreateProductService;
 
-    const product = await createProduct.execute({ name, price, quantity })
+    const product = await createProduct.execute({ 
+      name, 
+      price, 
+      quantity 
+    });
   
-    return res.json(product)
+    return res.json(product);
   }
 
 }

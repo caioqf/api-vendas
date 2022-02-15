@@ -1,5 +1,5 @@
 import AppError from "@shared/errors/AppError";
-import { getCustomRepository, getRepository } from "typeorm";
+import { getCustomRepository } from "typeorm";
 import Product from "../typeorm/entities/Product";
 import { ProductRepository } from "../typeorm/repositories/ProductsRepositoriy";
 
@@ -23,7 +23,7 @@ class CreateProductService {
     const productExists = await productsReposotory.findByName(name)
 
     if(productExists){
-      throw new AppError('There is already one product with this name.')
+      throw new AppError('There is already one product with this name.');
     }
 
     //Cria o produto com os parametros passados no 'execute'
@@ -31,7 +31,7 @@ class CreateProductService {
       name,
       price,
       quantity,
-    })
+    });
 
     //Salva de fato no banco de dados com 'save'
     await productsReposotory.save(product);
