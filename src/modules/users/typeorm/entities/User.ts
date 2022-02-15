@@ -28,4 +28,4 @@ class User {
 
 }
 
-export default Product;
+export default User;
