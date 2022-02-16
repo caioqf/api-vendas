@@ -19,7 +19,9 @@ class SendForgotPasswordEmailService {
     if(!user){
       throw new AppError('Invalid email address.');
     }
-
+    
+    console.log(user);
+    
     const token = await userTokenRepository.generate(user.id);
 
     console.log(token);

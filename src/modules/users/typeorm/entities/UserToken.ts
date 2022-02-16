@@ -3,7 +3,7 @@ import Product from "../../../products/typeorm/entities/Product";
 
 
 
-@Entity('users')
+@Entity('user_tokens')
 class UserToken {
 
   @PrimaryGeneratedColumn('uuid')
