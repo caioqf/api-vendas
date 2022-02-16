@@ -8,14 +8,14 @@ interface IRequest {
 
 class DeleteProductService {
   public async execute({id}: IRequest): Promise<void>{
-    const productsReposotory = getCustomRepository(ProductRepository);
+    const productsRepository = getCustomRepository(ProductRepository);
     
-    const product = await productsReposotory.findOne(id);
+    const product = await productsRepository.findOne(id);
     if(!product){
       throw new AppError('Product not found.');
     }
 
-    await productsReposotory.remove(product);
+    await productsRepository.remove(product);
 
   }
 }
