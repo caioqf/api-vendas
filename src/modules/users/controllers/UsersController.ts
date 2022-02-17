@@ -6,15 +6,11 @@ import ShowUserService from "../services/ShowUserService";
 import UpdateUserService from "../services/UpdateUserService";
 
 export default class UsersController {
-
   //Get all users
   public async index(req: Request, res: Response): Promise<Response>{
     const listUsers = new ListUserService;
-    
-    //console.log(req.user.id);
 
     const users = await listUsers.execute();
-    
     
     return res.json(users)
   } 
@@ -47,23 +43,22 @@ export default class UsersController {
 
   //Show single user
   public async show(req: Request, res: Response): Promise<Response> {
+    const showUser = new ShowUserService();
+    const user_id = req.user.id;
     
-    const { id } = req.params;
-
-    const showUser = new ShowUserService;
-
-    const user = await showUser.execute({id});
+    // console.log(user_id);
+    const user = await showUser.execute({ user_id });
 
     return res.json(user);
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const { name, email, password } = req.body;
+    const user_id = req.user.id;
+    const { name, email, password, old_password } = req.body;
 
     const updateUser = new UpdateUserService;
 
-    const updatedUserResponse = await updateUser.execute({id, name, email, password});
+    const updatedUserResponse = await updateUser.execute({user_id, name, email, password, old_password});
 
     return res.json(updatedUserResponse)
   }

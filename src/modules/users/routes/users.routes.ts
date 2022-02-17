@@ -14,17 +14,7 @@ const avatarController = new AvatarController;
 const upload = multer(uploadConfig);
 
 
-userRouter.get('/', isAuthenticated, userContoller.index);
-
-userRouter.get(
-  '/:id',
-  celebrate({
-    [Segments.PARAMS]: {
-      id: Joi.string().uuid().required(),
-    }
-  }),
-  userContoller.show
-);
+userRouter.get('/', isAuthenticated, userContoller.show);
 
 userRouter.post(
   '/',
@@ -41,13 +31,17 @@ userRouter.post(
 userRouter.put(
   '/:id',
   celebrate({
-    [Segments.PARAMS]:{
-      id: Joi.string().uuid().required(),
-    },
     [Segments.BODY]: {
-      name: Joi.string(),
-      email: Joi.string(),
-      password: Joi.string().required(),
+      name: Joi.string().required(),
+      email: Joi.string().required(),
+      password: Joi.string().optional(),
+      password_confirmation: Joi.string()
+      .valid(Joi.ref('password'))
+      .when('password', {
+        is: Joi.exist(),
+        then: Joi.required()
+      }),
+      old_password: Joi.string()
     }
   }),
   userContoller.update
