@@ -2,7 +2,6 @@ import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateCol
 import Product from "../../../products/typeorm/entities/Product";
 
 
-
 @Entity('user_tokens')
 class UserToken {
 

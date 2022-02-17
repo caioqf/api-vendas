@@ -1,11 +1,14 @@
 import Router from 'express';
-import passwordController from '@modules/users/controllers/ForgotPasswordController';
+import passwordController from '../controllers/ForgotPasswordController';
+import ResetPasswordController from '../controllers/ResetPasswordController';
 import { celebrate, Segments } from 'celebrate';
 import Joi from 'joi';
+import { randomUUID } from 'crypto';
 
 
 const passwordRouter = Router();
 const forgotPasswordController = new passwordController();
+const resetPasswordController = new ResetPasswordController();
 
 passwordRouter.post(
   '/forgot',
@@ -17,9 +20,16 @@ passwordRouter.post(
   forgotPasswordController.create,
 );
 
-passwordRouter.patch(
+passwordRouter.post(
   '/reset',
-    
+    celebrate({
+      [Segments.BODY]: {
+        token: Joi.string().uuid().required(),
+        password: Joi.string().required(),
+        password_confirmation: Joi.string().required().valid(Joi.ref('password')),
+      }
+    }),
+  resetPasswordController.create,
 );
 
 export default passwordRouter;
