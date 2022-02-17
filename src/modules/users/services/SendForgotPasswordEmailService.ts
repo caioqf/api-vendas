@@ -2,7 +2,7 @@ import { getCustomRepository } from "typeorm";
 import AppError from "@shared/errors/AppError";
 import { UserRepository } from "../typeorm/repositories/UsersRepository";
 import UserTokensRepository from "../typeorm/repositories/UserTokensRepository";
-
+import EtherealMail from '@config/mail/EtherealMail';
 
 interface IRequest {
   email: string;
@@ -20,11 +20,14 @@ class SendForgotPasswordEmailService {
       throw new AppError('Invalid email address.');
     }
     
-    console.log(user);
+    // console.log(user);
     
     const token = await userTokenRepository.generate(user.id);
 
-    console.log(token);
+    await EtherealMail.sendEmail({
+      to: email,
+      body: `Email recovery recived: ${token}`,
+    })
     
   }
 }
