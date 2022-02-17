@@ -22,6 +22,14 @@ class UpdateUserService {
       throw new AppError('User not found.')
     }
 
+    const userEmailExists = await userRepository.findByEmail(email);
+
+    if (userEmailExists){
+      throw new AppError('Email already in use.');
+    }
+
+    
+
     const hashed = await bcryptjs.hash(password, 10)
 
     user.name = name;
@@ -35,3 +43,4 @@ class UpdateUserService {
 }
 
 export default UpdateUserService;
+

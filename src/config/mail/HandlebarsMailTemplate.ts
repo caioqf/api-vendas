@@ -16,7 +16,6 @@ export default class HandlebarsMailTemplate {
     
     const fileContent = await fs.promises.readFile(file, {
       encoding: 'utf-8',
-
     });
 
     const parseTemplate = handlebars.compile(fileContent);
