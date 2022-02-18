@@ -1,4 +1,5 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import OrdersProducts from '@modules/orders/typeorm/entities/OrdersProducts';
+import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 //Representa as entidades existentes no banco, essas que podem e serão manipuladas pela api pra depois
 //serem persistidas no DB.
@@ -9,6 +10,11 @@ class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
   
+
+  @OneToMany(() => OrdersProducts, order_products => order_products.product)
+  order_products: OrdersProducts[];
+
+
   @Column()
   name: string;
   
