@@ -19,6 +19,7 @@ app.use(routes);
 
 app.use(errors());
 
+
 app.use(
   (error: Error, req: Request, res: Response, next: NextFunction) => {
   if(error instanceof AppError) {
@@ -27,11 +28,13 @@ app.use(
       message: error.message,
     });
   }
+  console.log(error)
   
   return res.status(500).json({
       status: 'error',
       message: 'Internal server error. Cod 00',
     });
+    
   },
 );
 

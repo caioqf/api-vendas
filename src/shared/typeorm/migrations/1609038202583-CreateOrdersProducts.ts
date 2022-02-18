@@ -1,10 +1,10 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateOrdersProducts1645184865750 implements MigrationInterface {
-
-    public async up(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
-      await queryRunner.createTable(new Table({
+export class CreateOrdersProducts1609038202583 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
+    await queryRunner.createTable(
+      new Table({
         name: 'orders_products',
         columns: [
           {
@@ -26,21 +26,20 @@ export class CreateOrdersProducts1645184865750 implements MigrationInterface {
           },
           {
             name: 'createdAt',
-            type: 'timestamp with time zone',
+            type: 'timestamp',
             default: 'now()',
           },
           {
             name: 'updatedAt',
-            type: 'timestamp with time zone',
+            type: 'timestamp',
             default: 'now()',
           },
         ],
       }),
     );
-    }
+  }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-      await queryRunner.dropTable('orders_products')
-    }
-
+  public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.dropTable('orders_products');
+  }
 }
