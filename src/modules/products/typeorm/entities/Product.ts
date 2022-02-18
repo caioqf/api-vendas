@@ -1,5 +1,5 @@
-import OrdersProducts from '@modules/orders/typeorm/entities/OrdersProducts';
-import {Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import OrdersProducts from '../../../orders/typeorm/entities/OrdersProducts';
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 
 //Representa as entidades existentes no banco, essas que podem e serão manipuladas pela api pra depois
 //serem persistidas no DB.

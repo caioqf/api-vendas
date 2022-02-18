@@ -1,7 +1,6 @@
-import Customer from '@modules/customers/typeorm/entities/Customer';
-import Product from '@modules/products/typeorm/entities/Product';
 import {Column, CreateDateColumn, Entity, JoinColumn, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import Order from './Order';
+import Product from '../../../products/typeorm/entities/Product';
 
 //Representa as entidades existentes no banco, essas que podem e serão manipuladas pela api pra depois
 //serem persistidas no DB.
@@ -21,10 +20,16 @@ class OrdersProducts {
   product: Product;
 
   @Column()
-  price: number;
+  order_id: string;
 
   @Column()
-  quantitu: number;
+  product_id: string;
+
+  @Column('decimal')
+  price: number;
+
+  @Column('int')
+  quantity: number;
 
   @CreateDateColumn()
   createdAt: Date;

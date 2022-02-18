@@ -1,6 +1,6 @@
-import Customer from '@modules/customers/typeorm/entities/Customer';
 import {CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import OrdersProducts from './OrdersProducts';
+import Customer from '../../../customers/typeorm/entities/Customer';
 
 //Representa as entidades existentes no banco, essas que podem e serão manipuladas pela api pra depois
 //serem persistidas no DB.
