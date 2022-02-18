@@ -5,10 +5,10 @@ import OrdersController from '../controllers/OrdersController';
 
 const orderRouter = Router();
 const orderController = new OrdersController;
-orderRouter.use(isAuthenticated);
+
 
 orderRouter.get(
-  '/',
+  '/:id',
    celebrate({
      [Segments.PARAMS]: {
        id: Joi.string().uuid().required(),

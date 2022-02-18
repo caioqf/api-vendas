@@ -16,7 +16,7 @@ export default class OrdersController {
     })
 
 
-    return res.status(200).json({})
+    return res.status(200).json(order)
 
   }
 

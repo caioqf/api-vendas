@@ -3,7 +3,7 @@ import Customer from '../entities/Customer';
 
 
 @EntityRepository(Customer)
-export class CustomerRepository extends Repository<Customer> {
+export default class CustomerRepository extends Repository<Customer> {
 
   public async findByEmail(email: string): Promise<Customer | undefined> {
     const customer = await this.findOne({
