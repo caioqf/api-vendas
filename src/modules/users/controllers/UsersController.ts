@@ -4,6 +4,8 @@ import DeleteUserService from "../services/DeleteUserService";
 import ListUserService from "../services/ListUserService";
 import ShowUserService from "../services/ShowUserService";
 import UpdateUserService from "../services/UpdateUserService";
+import { instanceToInstance } from "class-transformer";
+
 
 export default class UsersController {
   //Get all users
@@ -12,7 +14,7 @@ export default class UsersController {
 
     const users = await listUsers.execute();
     
-    return res.json(users)
+    return res.json(instanceToInstance(users))
   } 
 
   //Delete one user
@@ -38,7 +40,7 @@ export default class UsersController {
       password
     });
 
-    return res.json(user);
+    return res.json(instanceToInstance(user));
   }
 
   //Show single user
@@ -46,10 +48,10 @@ export default class UsersController {
     const showUser = new ShowUserService();
     const user_id = req.user.id;
     
-    // console.log(user_id);
+    console.log(user_id);
     const user = await showUser.execute({ user_id });
 
-    return res.json(user);
+    return res.json(instanceToInstance(user));
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
@@ -60,7 +62,7 @@ export default class UsersController {
 
     const updatedUserResponse = await updateUser.execute({user_id, name, email, password, old_password});
 
-    return res.json(updatedUserResponse)
+    return res.json(instanceToInstance(updatedUserResponse))
   }
 
 }

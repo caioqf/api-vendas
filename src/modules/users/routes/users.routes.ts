@@ -14,7 +14,20 @@ const avatarController = new AvatarController;
 const upload = multer(uploadConfig);
 
 
-userRouter.get('/', isAuthenticated, userContoller.show);
+userRouter.get('/', userContoller.index);
+
+userRouter.get(
+  '/:id',
+
+isAuthenticated,
+
+celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().uuid().required()
+  }
+}),
+userContoller.show
+)
 
 userRouter.post(
   '/',

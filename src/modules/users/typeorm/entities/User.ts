@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from "typeorm";
-import Product from "../../../products/typeorm/entities/Product";
+import { Exclude, Expose } from 'class-transformer';
 
 
 
@@ -15,6 +15,7 @@ class User {
   email: string;
 
   @Column('varchar')
+  @Exclude()
   password: string;
 
   @Column('varchar')
@@ -25,6 +26,14 @@ class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Expose({name: 'avatar_url'})
+  getAvatarUrl(): string | null {
+      if (!this.avatar){
+          return null
+      }
+      return `${process.env.APP_API_URL}/files/${this.avatar}`
+  }
 
 }
 

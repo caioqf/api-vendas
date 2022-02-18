@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import express, { NextFunction, Request, response, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
@@ -28,7 +29,7 @@ app.use(
       message: error.message,
     });
   }
-  console.log(error)
+  // console.log(error)
   
   return res.status(500).json({
       status: 'error',
