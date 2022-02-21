@@ -20,6 +20,9 @@ class CreateSessionService {
   public async execute({email, password}: IRequest): Promise<IResponse> {
     const userRepository = getCustomRepository(UserRepository);
     
+    // console.log(authConfig.jwt.secret);
+    
+
     const user = await userRepository.findByEmail(email);
 
     if(!user){
